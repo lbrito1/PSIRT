@@ -102,6 +102,12 @@ Vector2D* RotateCounterClockWise(Vector2D* a, float angle)
     return rotated;
 }
 
+void set(Vector2D* v, double x, double y)
+{
+	v->x=x;
+	v->y=y;
+}
+
 Vector2D* RotateClockWise(Vector2D* a, float angle)
 {
 	return RotateCounterClockWise(a, -angle);

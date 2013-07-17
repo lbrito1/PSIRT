@@ -12,6 +12,8 @@
 
 typedef struct { double x,y; } Vector2D;
 
+void set(Vector2D* v, double x, double y);
+
 Vector2D* sum(Vector2D* a, Vector2D* b);
 
 void sum_void(Vector2D* a, Vector2D* b, Vector2D* result);

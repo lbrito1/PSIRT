@@ -58,12 +58,12 @@ void run_psirt(PSIRT* psirt)
 		else
 		{
 #ifndef NO_RECON
-//			printf("\r\n[DONE] \t OPTIMZ (CONVERGED) \t %d us",(timestep = (tv.tv_usec-timestep)));
+			//			printf("\r\n[DONE] \t OPTIMZ (CONVERGED) \t %d us",(timestep = (tv.tv_usec-timestep)));
 			draw_reconstruction_bitmap(psirt);									// terminou otimizacao: desenhar
-//			printf("\r\n[DONE] \t RECONSTRUCTION \t %d us\r\n",(timestep = (tv.tv_usec-timestep)));
+			//			printf("\r\n[DONE] \t RECONSTRUCTION \t %d us\r\n",(timestep = (tv.tv_usec-timestep)));
 #endif
 #ifdef NO_RECON
-//			printf("\r\n[DONE] \t OPTIMZ (CONVERGED) \t %d us\r\n",((tv.tv_usec-timestep)));
+			//			printf("\r\n[DONE] \t OPTIMZ (CONVERGED) \t %d us\r\n",((tv.tv_usec-timestep)));
 			exit(1);
 #endif
 		}
@@ -157,32 +157,29 @@ void optimization_check(PSIRT* psirt)
 int update_particles(PSIRT* psirt)
 {
 	int i=0,j=0,k=0;
-	Vector2D* resultant_force = new_vector(0, 0);
+	Vector2D resultant_force;
 	for (i = 0; i < psirt->n_particles; i++) {
 		if (psirt->particles[i]->status != DEAD) {
 
-			resultant_force->x = 0.0;
-			resultant_force->y = 0.0;
+			set(&resultant_force,0.0,0.0);
 			// calcular força resultante primeiro
-			Vector2D* resultant_vector = new_vector(0.0, 0.0);
+			Vector2D resultant_vector;
+			set(&resultant_vector,0.0,0.0);
 			for (j = 0; j < psirt->n_projections; j++) {
 				for (k = 0; k < psirt->n_trajectories; k++) {
 					resultant(psirt->projections[j]->lista_trajetorias[k],
-							psirt->particles[i], resultant_vector);
-					sum_void(resultant_force, resultant_vector,
-							resultant_force);
+							psirt->particles[i], &resultant_vector);
+					sum_void(&resultant_force, &resultant_vector, &resultant_force);
 				}
 
 			}
-			free(resultant_vector);
 
-			resultant_force->x = -resultant_force->x;
-			resultant_force->y = -resultant_force->y;
-			update_particle(psirt->particles[i], resultant_force);
+			set(&resultant_force, -resultant_force.x, -resultant_force.y);
+
+			update_particle(psirt->particles[i], &resultant_force);
 
 		}
 	}
-	free(resultant_force);
 	return i;
 }
 
