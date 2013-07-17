@@ -7,8 +7,8 @@
 #include "Vector2D.h"
 #include <math.h>
 #define PI 3.1415926536
-#define DEGREE_TO_RAD PI/180.0;
-#define RAD_TO_DEGREE 180.0/PI;
+#define DEGREE_TO_RAD PI/180.0
+#define RAD_TO_DEGREE 180.0/PI
 
 void set_vector(Vector2D* a, double x, double y)
 {
