@@ -56,11 +56,11 @@ Projection *new_parallel_projection(double angle, int ntraj, int* partptraj)
 	mult_constant_void(end, PROJECTION_LENGTH/2);
 
 	int i=0;
-	Vector2D* center;
 	for(i=0;i<ntraj;i++)
 	{
+		Vector2D* center = new_vector(0.0,0.0);
 		float coef = i/((float)(ntraj-1));
-		center = lerp(begin,end,coef);
+		lerp(begin,end,coef,center);
 		Trajectory* traj = new_trajectory(center,director,partptraj[i]);
 
 		p->lista_trajetorias[i] = traj;

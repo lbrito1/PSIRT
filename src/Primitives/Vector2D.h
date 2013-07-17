@@ -47,7 +47,7 @@ void RotateClockWise(Vector2D* a, float angle);
 
 double vector_vector_distance(Vector2D* a, Vector2D* b);
 
-Vector2D* lerp(Vector2D* a, Vector2D* b, double t);
+void lerp(Vector2D* a, Vector2D* b, double t, Vector2D* c);
 
 double distance_point_line(Vector2D* point, Vector2D* line_a, Vector2D* line_b);
 

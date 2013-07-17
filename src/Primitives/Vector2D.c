@@ -128,10 +128,10 @@ double vector_vector_distance(Vector2D* a, Vector2D* b)
 }
 
 
-Vector2D* lerp(Vector2D* a, Vector2D* b, double t)
+void lerp(Vector2D* a, Vector2D* b, double t, Vector2D* c)
 {
-	Vector2D* c = new_vector(a->x * t + b->x * (1-t), a->y * t + b->y * (1-t));
-	return c;
+	c->x = a->x * t + (b->x * (1-t));
+	c->y = a->y * t + (b->y * (1-t));
 }
 
 double distance_point_line(Vector2D* point, Vector2D* line_a, Vector2D* line_b)
