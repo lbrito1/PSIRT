@@ -56,10 +56,9 @@ Vector2D* new_vector(double x, double y) {
 	return a;
 }
 
-inline Vector2D* mult_constant(Vector2D* a, double k)
+Vector2D* mult_constant(Vector2D* a, double k)
 {
-	Vector2D* b = new_vector((a->x)*k,(a->y)*k);
-	return b;
+	return new_vector((a->x)*k,(a->y)*k);
 }
 
 void mult_constant_void(Vector2D* a, double k)
@@ -93,13 +92,13 @@ void copyTo(Vector2D* a, Vector2D* b)
 	b->y = a->y;
 }
 
-Vector2D* RotateCounterClockWise(Vector2D* a, float angle)
+void RotateCounterClockWise(Vector2D* a, float angle)
 {
     float angleRad = angle *DEGREE_TO_RAD;
     double x = a->x * cos(angleRad) - a->y * sin(angleRad);
     double y = a->x * sin(angleRad) + a->y *cos(angleRad);
-    Vector2D* rotated = new_vector(x,y);
-    return rotated;
+    a->x = x;
+    a->y = y;
 }
 
 void set(Vector2D* v, double x, double y)
@@ -108,9 +107,9 @@ void set(Vector2D* v, double x, double y)
 	v->y=y;
 }
 
-Vector2D* RotateClockWise(Vector2D* a, float angle)
+void RotateClockWise(Vector2D* a, float angle)
 {
-	return RotateCounterClockWise(a, -angle);
+	RotateCounterClockWise(a, -angle);
 }
 
 

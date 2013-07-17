@@ -41,10 +41,10 @@ Projection *new_parallel_projection(double angle, int ntraj, int* partptraj)
 	p->lista_trajetorias = malloc(ntraj*sizeof(Trajectory));
 
 	Vector2D* director = new_vector(1.0f,0.0f);
-	director = RotateClockWise(director,angle);
+	RotateClockWise(director,angle);
 
 	Vector2D* ortogonal = new_vector(director->x, director->y);
-	ortogonal = RotateClockWise(ortogonal,90.0f);
+	RotateClockWise(ortogonal,90.0f);
 	normalize(ortogonal);
 
 	Vector2D* begin, *end;

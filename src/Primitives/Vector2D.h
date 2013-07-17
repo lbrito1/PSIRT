@@ -39,9 +39,9 @@ Vector2D* clone(Vector2D* a);
 
 void copyTo(Vector2D* a, Vector2D* b);
 
-Vector2D* RotateCounterClockWise(Vector2D* a, float angle);
+void RotateCounterClockWise(Vector2D* a, float angle);
 
-Vector2D* RotateClockWise(Vector2D* a, float angle);
+void RotateClockWise(Vector2D* a, float angle);
 
 double vector_vector_distance(Vector2D* a, Vector2D* b);
 
