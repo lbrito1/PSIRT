@@ -18,7 +18,7 @@ Vector2D* sum(Vector2D* a, Vector2D* b);
 
 void sum_void(Vector2D* a, Vector2D* b, Vector2D* result);
 
-Vector2D* minus(Vector2D* a, Vector2D* b);
+Vector2D minus(Vector2D* a, Vector2D* b);
 
 float dot_product(Vector2D* a, Vector2D* b);
 

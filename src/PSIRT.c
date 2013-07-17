@@ -167,8 +167,7 @@ int update_particles(PSIRT* psirt)
 			set(&resultant_vector,0.0,0.0);
 			for (j = 0; j < psirt->n_projections; j++) {
 				for (k = 0; k < psirt->n_trajectories; k++) {
-					resultant(psirt->projections[j]->lista_trajetorias[k],
-							psirt->particles[i], &resultant_vector);
+					resultant(psirt->projections[j]->lista_trajetorias[k],psirt->particles[i], &resultant_vector);
 					sum_void(&resultant_force, &resultant_vector, &resultant_force);
 				}
 
@@ -177,7 +176,6 @@ int update_particles(PSIRT* psirt)
 			set(&resultant_force, -resultant_force.x, -resultant_force.y);
 
 			update_particle(psirt->particles[i], &resultant_force);
-
 		}
 	}
 	return i;

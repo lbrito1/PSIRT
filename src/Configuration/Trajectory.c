@@ -20,40 +20,36 @@ Trajectory* new_trajectory(Vector2D* s, Vector2D* d, int part_est) {
 }
 
 float distance(Vector2D* p, Trajectory* t) {
-	Vector2D* u,*v,*dist;
+	Vector2D u,*v,dist;
 	v = t->direction;
 	u = minus(p,t->source);
 
-	float pp = dot_product(u,v) / dot_product(v,v);
+	float pp = dot_product(&u,v) / dot_product(v,v);
 
 	Vector2D* proj = new_vector(v->x, v->y);	//TODO
 
 	normalize_void(proj);	//TODO!
 	mult_constant_void(proj,pp);
-	dist = minus(u,proj);
+	dist = minus(&u,proj);
 
-	double mag = magnitude(dist);
+	double mag = magnitude(&dist);
 
 	free(proj);
-	free(u);
-	free(dist);
 
 	return mag;
 }
 
 
 Vector2D* projection(Vector2D* p, Trajectory* t) {
-	Vector2D* u,*v,*dist;
+	Vector2D u,*v,dist;
 	v = t->direction;
 	u = minus(p,t->source);
 
-	float pp = dot_product(u,v) / dot_product(v,v);
+	float pp = dot_product(&u,v) / dot_product(v,v);
 	Vector2D* proj = new_vector(v->x, v->y);
 	normalize(proj);
 	mult_constant_void(proj,pp);
-	dist = minus(u,proj);
-	free(u);
-	free(dist);
+	dist = minus(&u,proj);
 
 	return proj;
 }
@@ -75,26 +71,23 @@ int current_status(Trajectory* t)
 
 inline void directionFrom(Vector2D *point, Trajectory *t, Vector2D *direction)
 {
-	Vector2D *begin = clone(t->source);
-	Vector2D *end   = new_vector(0.0,0.0);
+	Vector2D begin, end;// = clone(t->source);
+	set(&begin, t->source->x,t->source->y);
+	set(&end, 0.0,0.0);
 
-	sum_void(t->source,t->direction,end);
+	sum_void(t->source, t->direction, &end);
 
-	Vector2D *u = new_vector(point->x - begin->x, point->y - begin->y);
-	Vector2D *v = new_vector(end->x - begin->x, end->y - begin->y);
+	Vector2D u, v;
+	set(&u, point->x - begin.x, point->y - begin.y);
+	set(&v, end.x - begin.x, end.y - begin.y);
 
-	float pp = ((u->x * v->x) + (u->y * v->y)) / ((v->x * v->x) + (v->y * v->y));
+	float pp = ((u.x * v.x) + (u.y * v.y)) / ((v.x * v.x) + (v.y * v.y));
 
-	Vector2D *projuv = new_vector(pp * v->x, pp * v->y);
+	Vector2D projuv;
+	set(&projuv, pp * v.x, pp * v.y);
 
-	free(u);
-	free(v);
-	free(projuv);
-	free(begin);
-	free(end);
-
-	direction->x = u->x - projuv->x;
-	direction->y = u->y - projuv->y;
+	direction->x = u.x - projuv.x;
+	direction->y = u.y - projuv.y;
 
 	//	return new_vector(u->x - projuv->x, u->y - projuv->y);
 }

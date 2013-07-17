@@ -29,11 +29,11 @@ void sum_void(Vector2D* a, Vector2D* b, Vector2D* result)
 	result->y = a->y+b->y;
 }
 
-Vector2D* minus(Vector2D* a, Vector2D* b)
+Vector2D minus(Vector2D* a, Vector2D* b)
 {
-	Vector2D* c = malloc(sizeof(Vector2D));
-	c->x = a->x-b->x;
-	c->y = a->y-b->y;
+	Vector2D c;
+	c.x = a->x-b->x;
+	c.y = a->y-b->y;
 	return c;
 }
 
@@ -116,9 +116,8 @@ Vector2D* RotateClockWise(Vector2D* a, float angle)
 
 double vector_vector_distance(Vector2D* a, Vector2D* b)
 {
-  Vector2D* c = minus(a,b);
-  double d = magnitude(c);
-  free(c);
+  Vector2D c = minus(a,b);
+  double d = magnitude(&c);
   return d;
 }
 
