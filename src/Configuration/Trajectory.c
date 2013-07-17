@@ -22,19 +22,18 @@ Trajectory* new_trajectory(Vector2D* s, Vector2D* d, int part_est) {
 float distance(Vector2D* p, Trajectory* t) {
 	Vector2D u,*v,dist;
 	v = t->direction;
-	u = minus(p,t->source);
+	minus_void(p,t->source, &u);
 
 	float pp = dot_product(&u,v) / dot_product(v,v);
 
-	Vector2D* proj = new_vector(v->x, v->y);	//TODO
+	Vector2D proj;
+	set(&proj,v->x, v->y);
 
-	normalize_void(proj);	//TODO!
-	mult_constant_void(proj,pp);
-	dist = minus(&u,proj);
+	normalize_void(&proj);
+	mult_constant_void(&proj,pp);
+	dist = minus(&u,&proj);
 
 	double mag = magnitude(&dist);
-
-	free(proj);
 
 	return mag;
 }
@@ -49,7 +48,7 @@ Vector2D* projection(Vector2D* p, Trajectory* t) {
 	Vector2D* proj = new_vector(v->x, v->y);
 	normalize(proj);
 	mult_constant_void(proj,pp);
-	dist = minus(&u,proj);
+	minus_void(&u,proj,&dist);
 
 	return proj;
 }

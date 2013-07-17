@@ -37,6 +37,12 @@ Vector2D minus(Vector2D* a, Vector2D* b)
 	return c;
 }
 
+void minus_void(Vector2D* a, Vector2D* b, Vector2D* c)
+{
+	c->x = a->x-b->x;
+	c->y = a->y-b->y;
+}
+
 float dot_product(Vector2D* a, Vector2D* b)
 {
 	return (a->x*b->x + a->y*b->y);
@@ -60,6 +66,7 @@ Vector2D* mult_constant(Vector2D* a, double k)
 {
 	return new_vector((a->x)*k,(a->y)*k);
 }
+
 
 void mult_constant_void(Vector2D* a, double k)
 {

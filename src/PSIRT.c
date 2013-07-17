@@ -82,20 +82,19 @@ void optimize(PSIRT* psirt)
 	// ---------------------------
 	if (!psirt->optim_is_ranked)
 	{
-		Particle* temp = new_particle();
+		Particle temp;
 		for (i = 0; i < psirt->n_particles; i++)
 		{
 			for (j = 0; j < psirt->n_particles; j++)
 			{
 				if (psirt->particles[j]->current_trajectories
 						> psirt->particles[i]->current_trajectories) {
-					memcpy(temp, psirt->particles[j], sizeof(Particle));
+					memcpy(&temp, psirt->particles[j], sizeof(Particle));
 					memcpy(psirt->particles[j], psirt->particles[i], sizeof(Particle));
-					memcpy(psirt->particles[i], temp, sizeof(Particle));
+					memcpy(psirt->particles[i], &temp, sizeof(Particle));
 				}
 			}
 		}
-		free(temp);
 		psirt->optim_is_ranked = 1;
 	}
 

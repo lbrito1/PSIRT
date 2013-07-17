@@ -114,9 +114,7 @@ int main(int argc,  char* argv[] )
 #ifndef NO_GRAPHICS
 	init_opengl(argc, argv);
 #endif
-#ifdef NO_GRAPHICS
 	while(1) run_psirt(psirt);
-#endif
 
 	return 0;
 

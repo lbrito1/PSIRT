@@ -20,6 +20,8 @@ void sum_void(Vector2D* a, Vector2D* b, Vector2D* result);
 
 Vector2D minus(Vector2D* a, Vector2D* b);
 
+void minus_void(Vector2D* a, Vector2D* b, Vector2D* c);
+
 float dot_product(Vector2D* a, Vector2D* b);
 
 double magnitude(Vector2D* a);

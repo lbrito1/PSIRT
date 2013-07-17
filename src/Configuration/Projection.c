@@ -49,8 +49,11 @@ Projection *new_parallel_projection(double angle, int ntraj, int* partptraj)
 
 	Vector2D* begin, *end;
 
-	begin = mult_constant(ortogonal,(-PROJECTION_LENGTH/2));
-	end = mult_constant(ortogonal, PROJECTION_LENGTH/2);
+	begin = clone(ortogonal);
+	end = clone(ortogonal);
+
+	mult_constant_void(begin,(-PROJECTION_LENGTH/2));
+	mult_constant_void(end, PROJECTION_LENGTH/2);
 
 	int i=0;
 	Vector2D* center;
