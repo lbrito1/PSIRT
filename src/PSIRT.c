@@ -60,7 +60,10 @@ void run_psirt(PSIRT* psirt)
 #ifndef NO_RECON
 			//			printf("\r\n[DONE] \t OPTIMZ (CONVERGED) \t %d us",(timestep = (tv.tv_usec-timestep)));
 			draw_reconstruction_bitmap(psirt);									// terminou otimizacao: desenhar
+			draw_projection_bitmap(psirt);
+
 			//			printf("\r\n[DONE] \t RECONSTRUCTION \t %d us\r\n",(timestep = (tv.tv_usec-timestep)));
+			exit(1);
 #endif
 #ifdef NO_RECON
 			//			printf("\r\n[DONE] \t OPTIMZ (CONVERGED) \t %d us\r\n",((tv.tv_usec-timestep)));

@@ -27,6 +27,32 @@
 
 PSIRT* psirt;
 
+
+void draw_projections(int i, int j, PSIRT* psirt)
+{
+	for (i = 0; i < psirt->n_projections; i++)
+	{
+		for (j = 0; j < psirt->n_trajectories; j++)
+		{
+			Trajectory* t = psirt->projections[i]->lista_trajetorias[j];
+
+			Vector2D begin, end, d;
+			sum_void(t->source, t->direction, &begin);
+			d.x = t->direction->x;
+			d.y = t->direction->y;
+
+			mult_constant_void(&d, -1);
+			sum_void(t->source, &d, &end);
+
+			glColor3f(1.0, 1.0, 1.0);
+			glVertex2f(begin.x, begin.y);
+			glVertex2f(end.x, end.y);
+
+
+		}
+	}
+}
+
 // ---------------------------
 // *** OPENGL ***
 // Desenhar configuracao (trajetorias)
@@ -38,23 +64,7 @@ void opengl_draw_configuration_lines()
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glBegin(GL_LINES);
-	for (i=0;i<psirt->n_projections;i++) {
-		for (j=0;j<psirt->n_trajectories;j++) {
-			Trajectory *t = psirt->projections[i]->lista_trajetorias[j];
-			Vector2D* begin = sum(t->source,t->direction);
-			Vector2D *d = clone(t->direction);
-			mult_constant_void(d,-1);
-			Vector2D* end = sum(t->source,d);
-			free(d);
-
-			glColor3f(1.0,1.0,1.0);
-			glVertex2f( begin->x,  begin->y);
-			glVertex2f( end->x,    end->y);
-
-			free(begin);
-			free(end);
-		}
-	}
+	draw_projections(i, j, psirt);
 	glEnd();
 }
 
@@ -107,6 +117,8 @@ void init_opengl(int argc, char* argv[])
 	glutMainLoop();
 }
 
+
+
 int main(int argc,  char* argv[] )
 {
 	psirt = init_psirt();
@@ -115,6 +127,8 @@ int main(int argc,  char* argv[] )
 	init_opengl(argc, argv);
 #endif
 	while(1) run_psirt(psirt);
+
+
 
 	return 0;
 

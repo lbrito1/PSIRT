@@ -31,26 +31,11 @@ float distance(Vector2D* p, Trajectory* t) {
 
 	normalize_void(&proj);
 	mult_constant_void(&proj,pp);
-	dist = minus(&u,&proj);
+	minus_void(&u,&proj,&dist);
 
 	double mag = magnitude(&dist);
 
 	return mag;
-}
-
-
-Vector2D* projection(Vector2D* p, Trajectory* t) {
-	Vector2D u,*v,dist;
-	v = t->direction;
-	u = minus(p,t->source);
-
-	float pp = dot_product(&u,v) / dot_product(v,v);
-	Vector2D* proj = new_vector(v->x, v->y);
-	normalize(proj);
-	mult_constant_void(proj,pp);
-	minus_void(&u,proj,&dist);
-
-	return proj;
 }
 
 

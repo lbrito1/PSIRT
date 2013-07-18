@@ -150,6 +150,43 @@ int draw_reconstruction_bitmap(PSIRT *psirt) {
 	bmp_save(bmp, "psirt_output.bmp");
 	bmp_destroy(bmp);
 	free(pixel_intensity);
-	exit(1);
 	return i;
+}
+
+
+void draw_projection_bitmap(PSIRT* psirt)
+{
+	bmpfile_t *bmp_proj = bmp_create(RES_X, RES_Y, 24);
+
+	int i, j;
+	for (i = 0; i < psirt->n_projections; i++)
+	{
+		for (j = 0; j < psirt->n_trajectories; j++)
+		{
+			Trajectory* t = psirt->projections[i]->lista_trajetorias[j];
+
+			Vector2D begin, end, d;
+			sum_void(t->source, t->direction, &begin);
+			d.x = t->direction->x;
+			d.y = t->direction->y;
+
+			mult_constant_void(&d, -1);
+			sum_void(t->source, &d, &end);
+
+			// Desenhar linha
+			double delta = (begin.y-end.y)/(begin.x-end.x);
+			double x, y;
+
+			int k = 0;
+			for (k = -1000; k < 1000; k++)
+			{
+				x = k*0.001f;
+				y = ( delta*(x-begin.x) ) + begin.y;
+				rgb_pixel_t pix = {0,0,255,0};
+				bmp_set_pixel(bmp_proj, x*RES_X+RES_X/2, y*RES_Y+RES_Y/2, pix);
+			}
+		}
+	}
+	bmp_save(bmp_proj, "projections_output.bmp");
+	bmp_destroy(bmp_proj);
 }
