@@ -123,11 +123,10 @@ int main(int argc,  char* argv[] )
 {
 	psirt = init_psirt();
 
-#ifndef NO_GRAPHICS
+//#ifndef NO_GRAPHICS
 	init_opengl(argc, argv);
-#endif
-	while(1) run_psirt(psirt);
-
+//#endif
+//	while(1) run_psirt(psirt);
 
 
 	return 0;
