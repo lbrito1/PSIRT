@@ -33,13 +33,13 @@ float distance(Vector2D* p, Trajectory* t) {
 	mult_constant_void(&proj,pp);
 	minus_void(&u,&proj,&dist);
 
-	double mag = magnitude(&dist);
+	float mag = magnitude(&dist);
 
 	return mag;
 }
 
 
-double trajectory_force(Trajectory *t)
+float trajectory_force(Trajectory *t)
 {
 	int delta = t->n_particulas_estavel - t->n_particulas_atual;
 	//	printf("\r\nATUAL = %d \t ESTAVEL = %d", t->n_particulas_atual, t->n_particulas_estavel);
@@ -86,7 +86,7 @@ void update_trajectory(Trajectory *t, Particle **p, int nparticle)
 		if (p[i]->status == ALIVE)
 		{
 			// Find distance from point to line segment (orthogonal)
-			double distance_point_line = distance(p[i]->location,t);
+			float distance_point_line = distance(p[i]->location,t);
 
 			if (distance_point_line<TRAJ_PART_THRESHOLD)
 			{
@@ -134,10 +134,10 @@ inline void resultant(Trajectory *t, Particle* p, Vector2D *resultant)
 	//	normalize(ortonormal);		//TODO aparentemente nao influencia movimento das particulas
 
 	// Find distance from point to line segment (orthogonal)
-	double distance_point_line = distance(p->location,t);
+	float distance_point_line = distance(p->location,t);
 	// Calculate force according to F = m1*m2/r²
-	double mass_trajectory = trajectory_force(t);
-	double force = 0;
+	float mass_trajectory = trajectory_force(t);
+	float force = 0;
 
 	if (distance_point_line>0.01)
 		force = (mass_trajectory * PARTICLE_MASS) / (distance_point_line*distance_point_line);

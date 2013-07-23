@@ -64,7 +64,7 @@ Vector2D* projection(Vector2D* p, Trajectory* t);
 
 int current_status(Trajectory* t);
 
-double trajectory_force(Trajectory* t);
+float trajectory_force(Trajectory* t);
 
 inline void resultant(Trajectory *t, Particle* p, Vector2D *resultant);
 

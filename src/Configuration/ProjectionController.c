@@ -10,8 +10,8 @@
 Projection** new_parallel_projections(int n_projections, int n_trajectories, int** particles_per_trajectory)
 {
 	Projection** projections = malloc(sizeof(Projection)*n_projections);
-	double angle_step = 180.0/(double)n_projections;
-	double angle = 0;
+	float angle_step = 180.0/(float)n_projections;
+	float angle = 0;
 	int i=0;
 
 	for (i=0;i<n_projections;i++,angle+=angle_step)
