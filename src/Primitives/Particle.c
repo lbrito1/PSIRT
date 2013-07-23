@@ -4,7 +4,6 @@ Particle* new_particle()
 {
 	Particle* part = malloc(sizeof(Particle));
 	Vector2D* loc = new_vector(0.0,0.0);
-	Vector2D* spd = new_vector(0.0,0.0);
 	part->location = loc;
 	part->current_trajectories = 0;
 	part->status = ALIVE;

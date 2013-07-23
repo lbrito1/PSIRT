@@ -5,14 +5,14 @@
  *      Author: Leo
  */
 
-//#pragma once
+#pragma once
 
 #ifndef VECTOR2D_H_
 #define VECTOR2D_H_
 
-typedef struct { double x,y; } Vector2D;
+typedef struct { float x,y; } Vector2D;
 
-void set(Vector2D* v, double x, double y);
+void set(Vector2D* v, float x, float y);
 
 Vector2D* sum(Vector2D* a, Vector2D* b);
 
@@ -24,14 +24,14 @@ void minus_void(Vector2D* a, Vector2D* b, Vector2D* c);
 
 float dot_product(Vector2D* a, Vector2D* b);
 
-double magnitude(Vector2D* a);
+float magnitude(Vector2D* a);
 
-Vector2D* new_vector(double x, double y);
+Vector2D* new_vector(float x, float y);
 
 //TODO
-inline Vector2D* mult_constant(Vector2D* a, double k);
+inline Vector2D* mult_constant(Vector2D* a, float k);
 
-void mult_constant_void(Vector2D* a, double k);
+void mult_constant_void(Vector2D* a, float k);
 
 void normalize(Vector2D* a);
 
@@ -45,13 +45,13 @@ void RotateCounterClockWise(Vector2D* a, float angle);
 
 void RotateClockWise(Vector2D* a, float angle);
 
-double vector_vector_distance(Vector2D* a, Vector2D* b);
+float vector_vector_distance(Vector2D* a, Vector2D* b);
 
-void lerp(Vector2D* a, Vector2D* b, double t, Vector2D* c);
+void lerp(Vector2D* a, Vector2D* b, float t, Vector2D* c);
 
-double distance_point_line(Vector2D* point, Vector2D* line_a, Vector2D* line_b);
+float distance_point_line(Vector2D* point, Vector2D* line_a, Vector2D* line_b);
 
-void set_vector(Vector2D* a, double x, double y);
+void set_vector(Vector2D* a, float x, float y);
 
 
 #endif /* VECTOR2D_H_ */
