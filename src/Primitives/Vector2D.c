@@ -10,7 +10,7 @@
 #define DEGREE_TO_RAD PI/180.0
 #define RAD_TO_DEGREE 180.0/PI
 
-void set_vector(Vector2D* a, double x, double y)
+void set_vector(Vector2D* a, float x, float y)
 {
 	a->x=x;a->y=y;
 }
@@ -49,26 +49,26 @@ float dot_product(Vector2D* a, Vector2D* b)
 }
 
 
-double magnitude(Vector2D* a)
+float magnitude(Vector2D* a)
 {
 	return sqrt((a->x * a->x)+(a->y * a->y));
 }
 
 
-Vector2D* new_vector(double x, double y) {
+Vector2D* new_vector(float x, float y) {
 	Vector2D* a = malloc(sizeof(Vector2D));
 	a->x=x;
 	a->y=y;
 	return a;
 }
 
-Vector2D* mult_constant(Vector2D* a, double k)
+Vector2D* mult_constant(Vector2D* a, float k)
 {
 	return new_vector((a->x)*k,(a->y)*k);
 }
 
 
-void mult_constant_void(Vector2D* a, double k)
+void mult_constant_void(Vector2D* a, float k)
 {
 	a->x=a->x*k;
 	a->y=a->y*k;
@@ -82,7 +82,7 @@ inline void normalize(Vector2D* a)
 
 inline void normalize_void(Vector2D* a)
 {
-	double constant = 1/magnitude(a);
+	float constant = 1/magnitude(a);
 	mult_constant_void(a,constant);
 }
 Vector2D* clone(Vector2D* a)
@@ -102,13 +102,13 @@ void copyTo(Vector2D* a, Vector2D* b)
 void RotateCounterClockWise(Vector2D* a, float angle)
 {
     float angleRad = angle *DEGREE_TO_RAD;
-    double x = a->x * cos(angleRad) - a->y * sin(angleRad);
-    double y = a->x * sin(angleRad) + a->y *cos(angleRad);
+    float x = a->x * cos(angleRad) - a->y * sin(angleRad);
+    float y = a->x * sin(angleRad) + a->y *cos(angleRad);
     a->x = x;
     a->y = y;
 }
 
-void set(Vector2D* v, double x, double y)
+void set(Vector2D* v, float x, float y)
 {
 	v->x=x;
 	v->y=y;
@@ -120,23 +120,23 @@ void RotateClockWise(Vector2D* a, float angle)
 }
 
 
-double vector_vector_distance(Vector2D* a, Vector2D* b)
+float vector_vector_distance(Vector2D* a, Vector2D* b)
 {
   Vector2D c = minus(a,b);
-  double d = magnitude(&c);
+  float d = magnitude(&c);
   return d;
 }
 
 
-void lerp(Vector2D* a, Vector2D* b, double t, Vector2D* c)
+void lerp(Vector2D* a, Vector2D* b, float t, Vector2D* c)
 {
 	c->x = a->x * t + (b->x * (1-t));
 	c->y = a->y * t + (b->y * (1-t));
 }
 
-double distance_point_line(Vector2D* point, Vector2D* line_a, Vector2D* line_b)
+float distance_point_line(Vector2D* point, Vector2D* line_a, Vector2D* line_b)
 {
-	double x0,y0,x1,y1,x2,y2;
+	float x0,y0,x1,y1,x2,y2;
 	x0 = point->x; y0 = point->y;
 	x1 = line_a->x; y1 = line_a->y;
 	x2 = line_b->x; y2 = line_b->y;
