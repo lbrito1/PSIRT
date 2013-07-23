@@ -131,17 +131,10 @@ int trajectory_stable(Trajectory *t)
 inline void resultant(Trajectory *t, Particle* p, Vector2D *resultant)
 {
 	directionFrom(p->location, t, resultant);
-	//	normalize(ortonormal);		//TODO aparentemente nao influencia movimento das particulas
-
-	// Find distance from point to line segment (orthogonal)
 	float distance_point_line = distance(p->location,t);
 	// Calculate force according to F = m1*m2/r²
-	float mass_trajectory = trajectory_force(t);
 	float force = 0;
-
-	if (distance_point_line>0.01)
-		force = (mass_trajectory * PARTICLE_MASS) / (distance_point_line*distance_point_line);
-	force/=10;
+	if (distance_point_line>TRAJ_PART_THRESHOLD) force = ( trajectory_force(t) * PARTICLE_MASS) / (distance_point_line*distance_point_line*10);
 
 	mult_constant_void(resultant,force);
 }
