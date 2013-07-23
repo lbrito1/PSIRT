@@ -97,25 +97,25 @@ void update_trajectory(Trajectory *t, Particle **p, int nparticle)
 	}
 }
 
-Vector2D* trajectory_intersection(Trajectory *t1, Trajectory *t2)
-{
-	Vector2D *begin_1, *end_1, *begin_2, *end_2;
-
-	//TODO refatorar -> criar metodo getBegin, getEnd
-	begin_1 = t1->source;
-	end_1 = sum(t1->source, t1->direction);
-
-	begin_2 = t2->source;
-	end_2 = sum(t2->source, t2->direction);
-
-	float ua = ((end_2->x - begin_2->x) * (begin_1->y - begin_2->y) - (end_2->y - begin_2->y) * (begin_1->x - begin_2->x)) /
-			((end_2->y - begin_2->y) * (end_1->x - begin_1->x) - (end_2->x - begin_2->x) * (end_1->y - begin_1->y));
-
-	//	float ub = ((end_1->x - begin_1->x) * (begin_1->y - begin_2->y) - (end_1->y - begin_1->y) * (begin_1->x - begin_2->x)) /
-	//			((end_2->y - begin_2->y) * (end_1->x - begin_1->x) - (end_2->x - begin_2->x) * (end_1->y - begin_1->y));
-
-	return new_vector(begin_1->x + ua * (end_1->x - begin_1->x), begin_1->y + ua * (end_1->y - begin_1->y));
-}
+//Vector2D* trajectory_intersection(Trajectory *t1, Trajectory *t2)
+//{
+//	Vector2D *begin_1, *end_1, *begin_2, *end_2;
+//
+//	//TODO refatorar -> criar metodo getBegin, getEnd
+//	begin_1 = t1->source;
+//	end_1 = sum(t1->source, t1->direction);
+//
+//	begin_2 = t2->source;
+//	end_2 = sum(t2->source, t2->direction);
+//
+//	float ua = ((end_2->x - begin_2->x) * (begin_1->y - begin_2->y) - (end_2->y - begin_2->y) * (begin_1->x - begin_2->x)) /
+//			((end_2->y - begin_2->y) * (end_1->x - begin_1->x) - (end_2->x - begin_2->x) * (end_1->y - begin_1->y));
+//
+//	//	float ub = ((end_1->x - begin_1->x) * (begin_1->y - begin_2->y) - (end_1->y - begin_1->y) * (begin_1->x - begin_2->x)) /
+//	//			((end_2->y - begin_2->y) * (end_1->x - begin_1->x) - (end_2->x - begin_2->x) * (end_1->y - begin_1->y));
+//
+//	return new_vector(begin_1->x + ua * (end_1->x - begin_1->x), begin_1->y + ua * (end_1->y - begin_1->y));
+//}
 
 int trajectory_stable(Trajectory *t)
 {
