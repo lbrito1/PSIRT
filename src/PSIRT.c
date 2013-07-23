@@ -6,6 +6,9 @@
  */
 
 #include "PSIRT.h"
+#include <stdlib.h>
+#include <windows.h>
+
 
 struct timeval tv;
 time_t curtime, timestep;
@@ -17,12 +20,10 @@ PSIRT* init_psirt()
 
 	PSIRT *psirt;
 	psirt = malloc(sizeof(PSIRT));
-	psirt->is_optimized = 0;
 	psirt->is_optimizing_dirty_particle = 0;
 	psirt->optim_is_ranked = 0;
 	psirt->optim_curr_part = 0;
 	psirt->optim_curr_iteration = 0;
-	psirt->optim_max_iterations = 100;
 
 	read_sinogram(psirt);
 	init_particles(psirt);
@@ -143,7 +144,7 @@ void optimization_check(PSIRT* psirt)
 	// pre-update otimizacao
 	if (psirt->is_optimizing_dirty_particle) {
 		// OTIMIZANDO
-		if (psirt->optim_curr_iteration < psirt->optim_max_iterations) {
+		if (psirt->optim_curr_iteration < OPTIM_MAX_ITER) {
 			psirt->optim_curr_iteration++;
 		}
 		// OTIMIZACAO FALHOU (EXCEDEU MAX ITERACOES)

@@ -137,10 +137,10 @@ inline void resultant(Trajectory *t, Particle* p, Vector2D *resultant)
 	double distance_point_line = distance(p->location,t);
 	// Calculate force according to F = m1*m2/r²
 	double mass_trajectory = trajectory_force(t);
-	double mass_particle   = p->mass;
 	double force = 0;
+
 	if (distance_point_line>0.01)
-		force = (mass_trajectory * mass_particle) / (distance_point_line*distance_point_line);
+		force = (mass_trajectory * PARTICLE_MASS) / (distance_point_line*distance_point_line);
 	force/=10;
 
 	mult_constant_void(resultant,force);

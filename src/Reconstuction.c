@@ -70,12 +70,36 @@ double* reconstruction(PSIRT* psirt)
 			// atualiza pixel atual (centro: bias +0.5, +0.5)
 			set_vector(pixel, pix_x + 0.5, pix_y + 0.5);
 
+			int particula = -1;
+
 			// distancia para cada particula
 			for (part = 0; part < psirt->n_particles; part++) {
 				if (psirt->particles[part]->status != DEAD) {
+
+
 					// formato: x + ( y*RES_X )
-					float distance = vector_vector_distance(pixel,
+					double distance = vector_vector_distance(pixel,
 							scaled_particles[part]);
+
+
+					//!!!!!!!!!!!!!!!!!
+//					if (particula == -1) particula = part;
+//
+//					else if (part != particula)
+//					{
+//						if ( (scaled_particles[part]->x > scaled_particles[particula]->x)
+//								&
+//								( (fabs(scaled_particles[part]->y - scaled_particles[particula]->y ) <= TRAJ_PART_THRESHOLD*RES_X ) ) )
+//						{
+//							printf("\r\nParticula fixa: [%d] (%f,%f)\t comparada com [%d] (%f,%f)\t DIST = %f",
+//									particula, scaled_particles[particula]->x, scaled_particles[particula]->y,
+//									part, scaled_particles[part]->x, scaled_particles[part]->y,
+//									distance);
+//						}
+//					}
+
+
+
 					if (distance > PARTICLE_SIZE) {
 						distance = 0.0;
 						iter_intensity = 0.0;

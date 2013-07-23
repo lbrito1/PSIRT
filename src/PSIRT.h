@@ -12,8 +12,9 @@
 #define ALIVE 	 1
 #define CHECKING 2
 
+#define OPTIM_MAX_ITER 100
+
 #include "Configuration/ProjectionController.h"
-//#include "Primitives/Vector2D.h"
 #include "Primitives/Particle.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,7 +29,6 @@ typedef struct {
 	int n_trajectories;
 	int n_particles;
 
-	int is_optimized;
 	int is_optimizing_dirty_particle;
 	int optim_is_ranked;
 
